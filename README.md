@@ -2,7 +2,7 @@
 
 A sophisticated momentum-based day trading strategy for small-cap stocks, featuring automated screening, backtesting, optimization, and visualization tools.
 
-## 🎯 Strategy Overview
+## Strategy Overview
 
 **Target**: Small-cap stocks with strong momentum
 - **Price Range**: $1-$10
@@ -20,7 +20,7 @@ A sophisticated momentum-based day trading strategy for small-cap stocks, featur
 - **Win Rate**: 75% (Expected: 72.7%)
 - **Average P&L**: $45.81 per trade
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 trade/
@@ -83,7 +83,7 @@ python3 dashboards/dashboard.py
 python3 optimizers/optimize_stops.py
 ```
 
-## 📊 Features
+## Features
 
 ### 1. Automated Stock Screening
 - **Finviz Integration**: Automatically finds stocks matching criteria
@@ -91,14 +91,14 @@ python3 optimizers/optimize_stops.py
 - **Daily Criteria Tracking**: Validates stocks met criteria on each trading day
 
 ### 2. Entry Conditions
-- ✅ Price touches and bounces off 9 EMA (2 consecutive closes above)
-- ✅ Cumulative volume >5M by entry time
-- ✅ Volume surge on entry bar (1.5x average)
-- ✅ RSI <60
-- ✅ MACD > Signal
-- ✅ Near HOD (within 10%)
-- ✅ Close > 9 EMA
-- ✅ Red candle volume < average volume
+- Price touches and bounces off 9 EMA (2 consecutive closes above)
+- Cumulative volume >5M by entry time
+- Volume surge on entry bar (1.5x average)
+- RSI <60
+- MACD > Signal
+- Near HOD (within 10%)
+- Close > 9 EMA
+- Red candle volume < average volume
 
 ### 3. Exit Strategy (Optimized)
 - **Initial Stop Loss**: 5% below entry
@@ -117,7 +117,7 @@ python3 optimizers/optimize_stops.py
 - **Multiple Indicators**: EMA 9/50/100, VWAP, MACD, RSI
 - **Trade Analytics**: Win rate, P&L, profit factor
 
-## 📈 Performance Metrics
+## Performance Metrics
 
 ### Latest Backtest Results
 - **Total Trades**: 8
@@ -132,7 +132,7 @@ python3 optimizers/optimize_stops.py
 - **DRMA**: 1 trade (loss)
 - **SOPA**: 5 trades (80% win rate)
 
-## 🔧 Configuration
+## Configuration
 
 ### Strategy Parameters (in `trade.py`)
 
@@ -154,14 +154,14 @@ self.max_float = 30_000_000         # 30M shares
 self.min_relative_volume = 2.0      # 2x average
 ```
 
-## 📚 Documentation
+## Documentation
 
 - **[Daily Criteria Screening](docs/DAILY_CRITERIA_SCREENING.md)**: How the system validates stocks
 - **[Dashboard Guide](docs/DASHBOARD_README.md)**: Using the visualization tools
 - **[Quant Analysis](docs/QUANT_ANALYSIS_REPORT.md)**: Statistical analysis
 - **[Optimization Results](docs/optimized_result.md)**: Parameter testing details
 
-## 🛠️ Tools
+## Tools
 
 ### Main Strategy (`trade.py`)
 - Core backtesting engine
@@ -187,7 +187,7 @@ self.min_relative_volume = 2.0      # 2x average
 - Trade distribution
 - Risk/reward ratios
 
-## 📝 Output Files
+## Output Files
 
 ### Results Directory
 - `backtest_results.csv`: Trade-by-trade results
@@ -197,14 +197,14 @@ self.min_relative_volume = 2.0      # 2x average
 ### Dashboard Files
 - `dashboard_[SYMBOL].html`: Interactive charts for each traded symbol
 
-## ⚠️ Important Notes
+## Important Notes
 
 1. **Historical Data Limitation**: yfinance provides ~7 days of 1-minute data
 2. **Daily Criteria**: Stocks must meet criteria on the specific trading day
 3. **No Lookahead Bias**: System validates criteria day-by-day
 4. **Market Hours**: Only trades during 10 AM - 2 PM EST scanning window
 
-## 🔄 Workflow
+## Workflow
 
 1. **Screen**: Finviz finds stocks matching criteria
 2. **Filter**: Validate price, float, volume requirements
@@ -214,7 +214,7 @@ self.min_relative_volume = 2.0      # 2x average
 6. **Exit**: Stop loss, trailing stop, or take profit
 7. **Analyze**: Review results, optimize parameters
 
-## 📊 Example Usage
+## Example Usage
 
 ```bash
 # Full workflow
@@ -224,7 +224,7 @@ python3 dashboards/generate_quant_report.py  # Create analysis
 python3 optimizers/optimize_stops.py      # Optimize parameters
 ```
 
-## 🎓 Strategy Logic
+## Strategy Logic
 
 The strategy combines multiple confirmation signals:
 
@@ -235,7 +235,7 @@ The strategy combines multiple confirmation signals:
 5. **RSI Filter**: RSI <60 to avoid overbought conditions
 6. **Red Candle Filter**: Red candles must have below-average volume
 
-## 🏆 Optimization Process
+## Optimization Process
 
 The optimizer tested:
 - **5** stop loss values (2% to 5%)
@@ -247,11 +247,11 @@ The optimizer tested:
 **Total**: 1,280 combinations tested
 **Winner**: 5% SL, 10% TP, 67% scale-out at 8%, 5% trail
 
-## 📞 Support
+## Support
 
 For questions or issues, refer to the documentation in the `docs/` directory.
 
-## 📄 License
+## License
 
 This is a personal trading strategy implementation. Use at your own risk.
 

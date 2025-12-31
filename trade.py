@@ -353,7 +353,7 @@ class MomentumHODStrategy:
                                 rvol = df.iloc[idx]['relative_volume']
                                 float_info = self.stock_info.get(symbol, {})
                                 float_str = f"{float_info.get('float', 0)/1_000_000:.1f}M" if 'float' in float_info else "N/A"
-                                print(f"[{timestamp.strftime('%Y-%m-%d %H:%M')}] Added {symbol} | ${price:.2f} | RVol: {rvol:.2f}x | Float: {float_str} | ✓ Met daily criteria")
+                                print(f"[{timestamp.strftime('%Y-%m-%d %H:%M')}] Added {symbol} | ${price:.2f} | RVol: {rvol:.2f}x | Float: {float_str} | Met daily criteria")
                 
                 for symbol in list(self.watchlist.keys()):
                     if symbol in self.positions:
@@ -468,7 +468,7 @@ def screen_stocks_finviz(strategy):
         
         # Get all symbols - we'll filter by float when fetching data
         symbols = df_screen['Ticker'].tolist()
-        print(f"✓ Found {len(symbols)} stocks from Finviz (Price $1-$20, RVol>2x)")
+        print(f"Found {len(symbols)} stocks from Finviz (Price $1-$20, RVol>2x)")
         print(f"Note: Float <100M will be verified when fetching data")
         print(f"Symbols: {', '.join(symbols[:20])}")
         if len(symbols) > 20:
@@ -504,11 +504,11 @@ def fetch_data(symbols, strategy):
             float_shares = info.get('floatShares', info.get('sharesOutstanding', float('inf')))
             
             if price < strategy.min_price or price > strategy.max_price:
-                print(f"✗ Price ${price:.2f} out of range")
+                print(f"Price ${price:.2f} out of range")
                 continue
             
             if float_shares > strategy.max_float:
-                print(f"✗ Float {float_shares/1_000_000:.1f}M too high")
+                print(f"Float {float_shares/1_000_000:.1f}M too high")
                 continue
             
             strategy.stock_info[symbol] = {'price': price, 'float': float_shares}
@@ -532,7 +532,7 @@ def fetch_data(symbols, strategy):
             # Fetch intraday data for backtesting (yfinance limit is ~8 days for 1m data)
             df = ticker.history(period="7d", interval="1m")
             if df.empty:
-                print("✗ No intraday data")
+                print("No intraday data")
                 continue
             
             df.columns = df.columns.str.lower()
@@ -541,10 +541,10 @@ def fetch_data(symbols, strategy):
             df.index = df.index.tz_convert(est)
             df = df.between_time('09:30', '16:00')
             data_dict[symbol] = df
-            print(f"✓ ${price:.2f}, {float_shares/1_000_000:.1f}M float")
+            print(f"${price:.2f}, {float_shares/1_000_000:.1f}M float")
             
         except Exception as e:
-            print(f"✗ {e}")
+            print(f"{e}")
     
     return data_dict
 
@@ -569,7 +569,7 @@ if __name__ == "__main__":
         symbols = screen_stocks_finviz(strategy)
         
         if not symbols:
-            print("\n⚠ Finviz screening failed or returned no results")
+            print("\nFinviz screening failed or returned no results")
             print("Please provide symbols manually:")
             print("Example: python trade.py SYMBOL1 SYMBOL2 SYMBOL3 ...")
             exit(1)
@@ -577,7 +577,7 @@ if __name__ == "__main__":
     data = fetch_data(symbols, strategy)
     
     if not data:
-        print("\n❌ No stocks passed filters!")
+        print("\nNo stocks passed filters!")
         print("\nTroubleshooting:")
         print("1. Many stocks may be outside the $2-$20 price range")
         print("2. Float data might not be available for all stocks")
@@ -585,17 +585,17 @@ if __name__ == "__main__":
         print("\nExample: python trade.py BKKT IONQ RKLB SPCE")
         exit(1)
     
-    print(f"\n✓ {len(data)} stocks passed filters and have data")
+    print(f"\n{len(data)} stocks passed filters and have data")
     
     results = strategy.backtest(data)
     
     if not results.empty:
         results.to_csv('backtest_results.csv', index=False)
-        print(f"\n✓ Results saved to backtest_results.csv")
+        print(f"\nResults saved to backtest_results.csv")
         print("\nTrade Details:")
         print(results.to_string())
     else:
-        print("\n⚠ No trades were executed")
+        print("\nNo trades were executed")
         print("This could mean:")
         print("- No stocks met momentum + HOD criteria during scanning hours")
         print("- Entry conditions (RSI, MACD, Volume) were not satisfied")
