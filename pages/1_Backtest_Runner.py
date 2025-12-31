@@ -274,8 +274,8 @@ if st.session_state.results is not None and not st.session_state.results.empty:
         symbol_perf.columns = ['Trades', 'Total P&L', 'Avg P&L']
         
         # Add win rate
-        symbol_perf['Wins'] = results.groupby('symbol', include_groups=False).apply(
-            lambda x: len(x[x['pnl'] > 0])
+        symbol_perf['Wins'] = results.groupby('symbol').apply(
+            lambda x: len(x[x['pnl'] > 0]), include_groups=False
         )
         symbol_perf['Win Rate'] = (symbol_perf['Wins'] / symbol_perf['Trades'] * 100).round(1)
         symbol_perf['Win Rate'] = symbol_perf['Win Rate'].apply(lambda x: f"{x}%")
