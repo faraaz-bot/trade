@@ -43,7 +43,7 @@ trade/
 └── venv/                       # Python virtual environment
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Installation
 
@@ -55,10 +55,19 @@ cd ~/trade
 source venv/bin/activate
 
 # Install dependencies (if needed)
-pip install yfinance finvizfinance pandas numpy plotly pytz
+pip install -r requirements.txt
 ```
 
-### Running the Strategy
+### Web Dashboard (Recommended)
+
+```bash
+# Launch Streamlit web interface
+streamlit run app.py
+```
+
+Then open your browser to `http://localhost:8501`
+
+### Command Line Usage
 
 ```bash
 # Run with automatic Finviz screening
@@ -66,19 +75,11 @@ python3 trade.py
 
 # Run with specific symbols
 python3 trade.py SYMBOL1 SYMBOL2 SYMBOL3
-```
 
-### Generate Dashboard
-
-```bash
-# Create interactive charts for all trades
+# Generate interactive charts
 python3 dashboards/dashboard.py
-```
 
-### Optimize Parameters
-
-```bash
-# Test 1,280 parameter combinations
+# Optimize parameters
 python3 optimizers/optimize_stops.py
 ```
 
