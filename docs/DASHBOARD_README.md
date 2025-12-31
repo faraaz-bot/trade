@@ -4,7 +4,7 @@ A TradingView-style dashboard for analyzing your trading backtest results with i
 
 ## Features
 
-### 📊 **Unified Trade View**
+### **Unified Trade View**
 - All trades displayed in a sortable, filterable table
 - Sort by:
   - Biggest Winners
@@ -13,7 +13,7 @@ A TradingView-style dashboard for analyzing your trading backtest results with i
   - Symbol
 - Filter by symbol and exit reason
 
-### 📈 **Professional Charts**
+### **Professional Charts**
 - TradingView-style dark theme
 - Interactive candlestick charts with:
   - **EMAs**: 9, 50, 100 period
@@ -26,7 +26,7 @@ A TradingView-style dashboard for analyzing your trading backtest results with i
   - Red arrow down for exits with price and P&L%
   - Clear time and price labels
 
-### 📉 **Performance Metrics**
+### **Performance Metrics**
 - Total Trades
 - Win Rate
 - Total P&L
@@ -189,19 +189,19 @@ streamlit run trading_dashboard.py --server.port 8502
 ## Comparison to Old HTML Dashboards
 
 ### Old (HTML files):
-- ❌ Static, non-interactive
-- ❌ Separate file for each stock
-- ❌ No sorting or filtering
-- ❌ Basic styling
+- Static, non-interactive
+- Separate file for each stock
+- No sorting or filtering
+- Basic styling
 
 ### New (Streamlit Dashboard):
-- ✅ Fully interactive
-- ✅ All trades in one place
-- ✅ Sort and filter capabilities
-- ✅ Professional TradingView-style design
-- ✅ Real-time data fetching
-- ✅ Comprehensive indicators
-- ✅ Clear entry/exit markers
+- Fully interactive
+- All trades in one place
+- Sort and filter capabilities
+- Professional TradingView-style design
+- Real-time data fetching
+- Comprehensive indicators
+- Clear entry/exit markers
 
 ## Next Steps
 

@@ -112,7 +112,7 @@ if run_btn:
         st.session_state.data = data
         
         if not results.empty:
-            st.success(f"✓ {len(results)} trades executed")
+            st.success(f"{len(results)} trades executed")
             st.rerun()
         else:
             st.warning("No trades executed")

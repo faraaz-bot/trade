@@ -137,14 +137,14 @@ Kelly %: 57.8%
 
 ## RECOMMENDATIONS FOR LIVE TRADING
 
-### ✅ DO:
+### DO:
 1. Start with small position sizes (1-2% of capital)
 2. Track every trade in a journal
 3. Review performance weekly
 4. Focus on high-probability setups (stocks with >75% win rate)
 5. Implement strict risk management
 
-### ❌ DON'T:
+### DON'T:
 1. Overtrade - stick to best setups only
 2. Revenge trade after losses
 3. Ignore stop losses

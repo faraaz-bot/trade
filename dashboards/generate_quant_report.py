@@ -225,14 +225,14 @@ Kelly %: {((win_rate/100) - ((100-win_rate)/100) / (abs(avg_win/avg_loss) if avg
 
 ## RECOMMENDATIONS FOR LIVE TRADING
 
-### ✅ DO:
+### DO:
 1. Start with small position sizes (1-2% of capital)
 2. Track every trade in a journal
 3. Review performance weekly
 4. Focus on high-probability setups (stocks with >{win_rate:.0f}% win rate)
 5. Implement strict risk management
 
-### ❌ DON'T:
+### DON'T:
 1. Overtrade - stick to best setups only
 2. Revenge trade after losses
 3. Ignore stop losses
@@ -258,7 +258,7 @@ The strategy {'demonstrates a positive edge' if total_pnl > 0 else 'needs optimi
     with open(output_file, 'w') as f:
         f.write(report)
     
-    print(f"\n✓ Quantitative analysis report saved to {output_file}")
+    print(f"\nQuantitative analysis report saved to {output_file}")
     return output_file
 
 

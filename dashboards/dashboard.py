@@ -223,7 +223,7 @@ def create_dashboard(strategy, data_dict, trades_df):
         
         # Get the data for this symbol
         if symbol not in data_dict:
-            print(f"  ✗ No data available for {symbol}")
+            print(f"  No data available for {symbol}")
             continue
         
         df = data_dict[symbol]
@@ -235,7 +235,7 @@ def create_dashboard(strategy, data_dict, trades_df):
             # Save to HTML file
             filename = f"dashboard_{symbol}.html"
             fig.write_html(filename)
-            print(f"  ✓ Saved to {filename}")
+            print(f"  Saved to {filename}")
             
             # Show trade summary for this symbol
             symbol_trades = trades_df[trades_df['symbol'] == symbol]
@@ -268,7 +268,7 @@ def create_dashboard(strategy, data_dict, trades_df):
     print(summary_df.to_string(index=False))
     
     print(f"\n{'='*80}")
-    print(f"✓ Dashboard files created successfully!")
+    print(f"Dashboard files created successfully!")
     print(f"  Open dashboard_[SYMBOL].html files in your browser to view charts")
     print(f"{'='*80}\n")
 
@@ -294,7 +294,7 @@ if __name__ == "__main__":
         symbols = screen_stocks_finviz(strategy)
         
         if not symbols:
-            print("\n⚠ Finviz screening failed or returned no results")
+            print("\nFinviz screening failed or returned no results")
             print("Falling back to default test symbols...")
             symbols = ['BKKT', 'WKHS', 'CHPT', 'KOSS', 'CTRM', 'SENS']
     
@@ -302,14 +302,14 @@ if __name__ == "__main__":
     data_dict = fetch_data(symbols, strategy)
     
     if not data_dict:
-        print("\n❌ No stocks passed filters!")
+        print("\nNo stocks passed filters!")
         print("Try providing different symbols that meet the criteria:")
         print("  Price: $1-$10")
         print("  Float: <30M shares")
         print("\nExample: python dashboard.py SYMBOL1 SYMBOL2 SYMBOL3")
         exit(1)
     
-    print(f"\n✓ {len(data_dict)} stocks passed filters and have data")
+    print(f"\n{len(data_dict)} stocks passed filters and have data")
     
     # Prepare data with indicators before backtesting
     prepared_data = {}
@@ -321,7 +321,7 @@ if __name__ == "__main__":
     results = strategy.backtest(data_dict)
     
     if results.empty:
-        print("\n⚠ No trades were executed")
+        print("\nNo trades were executed")
         print("This could mean:")
         print("- No stocks met momentum + HOD criteria during scanning hours")
         print("- Entry conditions (RSI, MACD, Volume) were not satisfied")
@@ -330,7 +330,7 @@ if __name__ == "__main__":
     
     # Save results
     results.to_csv('backtest_results.csv', index=False)
-    print(f"\n✓ Results saved to backtest_results.csv")
+    print(f"\nResults saved to backtest_results.csv")
     
     # Create dashboard with prepared data (includes indicators)
     create_dashboard(strategy, prepared_data, results)

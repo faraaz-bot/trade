@@ -173,7 +173,7 @@ def main():
     
     symbols = screen_stocks_finviz(strategy)
     if not symbols:
-        print("\n❌ No symbols found from Finviz screening!")
+        print("\nNo symbols found from Finviz screening!")
         print("The screener looks for: Price $1-$20, RVol>2x, Avg Volume>500K")
         print("Try again when market conditions produce qualifying stocks.")
         return
@@ -181,12 +181,12 @@ def main():
     data = fetch_data(symbols, strategy)
     
     if not data:
-        print("\n❌ No valid data!")
+        print("\nNo valid data!")
         print("Try providing symbols that meet criteria:")
         print("  python optimize_stops.py SYMBOL1 SYMBOL2 SYMBOL3")
         return
     
-    print(f"\n✓ {len(data)} stocks with valid data")
+    print(f"\n{len(data)} stocks with valid data")
     print("\n" + "=" * 80)
     print("TESTING PARAMETER COMBINATIONS")
     print("=" * 80)
@@ -236,13 +236,13 @@ def main():
         
         if result:
             results.append(result)
-            print(f"✓ {result['total_trades']} trades, P&L: ${result['total_pnl']:.2f}, "
+            print(f"{result['total_trades']} trades, P&L: ${result['total_pnl']:.2f}, "
                   f"WR: {result['win_rate']:.1f}%, PF: {result['profit_factor']:.2f}")
         else:
-            print("✗ No trades")
+            print("No trades")
     
     if not results:
-        print("\n❌ No valid results!")
+        print("\nNo valid results!")
         print("\nThis means no trades were executed with any parameter combination.")
         print("Possible reasons:")
         print("  - Stocks didn't meet daily criteria during backtest period")
@@ -258,7 +258,7 @@ def main():
     print("=" * 80)
     
     # Sort by different metrics
-    print("\n💰 TOP 10 BY TOTAL P&L:")
+    print("\nTOP 10 BY TOTAL P&L:")
     print("-" * 80)
     top_pnl = results_df.nlargest(10, 'total_pnl')
     for idx, row in top_pnl.iterrows():
@@ -268,7 +268,7 @@ def main():
               f"P&L: ${row['total_pnl']:.2f} | WR: {row['win_rate']:.1f}% | "
               f"Trades: {row['total_trades']:.0f} | PF: {row['profit_factor']:.2f}")
     
-    print("\n🎯 TOP 10 BY WIN RATE:")
+    print("\nTOP 10 BY WIN RATE:")
     print("-" * 80)
     top_wr = results_df.nlargest(10, 'win_rate')
     for idx, row in top_wr.iterrows():
@@ -278,7 +278,7 @@ def main():
               f"WR: {row['win_rate']:.1f}% | P&L: ${row['total_pnl']:.2f} | "
               f"Trades: {row['total_trades']:.0f} | PF: {row['profit_factor']:.2f}")
     
-    print("\n📊 TOP 10 BY PROFIT FACTOR:")
+    print("\nTOP 10 BY PROFIT FACTOR:")
     print("-" * 80)
     top_pf = results_df.nlargest(10, 'profit_factor')
     for idx, row in top_pf.iterrows():
@@ -288,7 +288,7 @@ def main():
               f"PF: {row['profit_factor']:.2f} | P&L: ${row['total_pnl']:.2f} | "
               f"WR: {row['win_rate']:.1f}% | Trades: {row['total_trades']:.0f}")
     
-    print("\n⚡ TOP 10 BY EXPECTANCY (Avg P&L per Trade):")
+    print("\nTOP 10 BY EXPECTANCY (Avg P&L per Trade):")
     print("-" * 80)
     top_exp = results_df.nlargest(10, 'expectancy')
     for idx, row in top_exp.iterrows():
@@ -303,7 +303,7 @@ def main():
     print("=" * 80)
     
     best = results_df.loc[results_df['total_pnl'].idxmax()]
-    print(f"\n🏆 HIGHEST TOTAL P&L:")
+    print(f"\nHIGHEST TOTAL P&L:")
     print(f"  Stop Loss: {best['stop_loss']*100:.1f}%")
     print(f"  Take Profit: {best['take_profit']*100:.1f}%")
     print(f"  Scale-Out: {best['scale_out_pct']*100:.0f}% at {best['scale_out_target']*100:.1f}% profit")
@@ -336,7 +336,7 @@ def main():
     )
     
     best_balanced = results_df.loc[results_df['composite_score'].idxmax()]
-    print(f"\n🎯 RECOMMENDED PARAMETERS:")
+    print(f"\nRECOMMENDED PARAMETERS:")
     print(f"  Stop Loss: {best_balanced['stop_loss']*100:.1f}%")
     print(f"  Take Profit: {best_balanced['take_profit']*100:.1f}%")
     print(f"  Scale-Out: {best_balanced['scale_out_pct']*100:.0f}% at {best_balanced['scale_out_target']*100:.1f}% profit")
@@ -349,7 +349,7 @@ def main():
     
     # Save results
     results_df.to_csv('optimization_results.csv', index=False)
-    print(f"\n✓ Full results saved to optimization_results.csv")
+    print(f"\nFull results saved to optimization_results.csv")
     
     print("\n" + "=" * 80)
     print("HOW TO APPLY THESE PARAMETERS")

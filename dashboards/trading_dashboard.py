@@ -14,7 +14,7 @@ import pytz
 # Page configuration
 st.set_page_config(
     page_title="Trading Dashboard",
-    page_icon="📈",
+    page_icon="chart_with_upwards_trend",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -224,14 +224,14 @@ def create_chart(symbol, trade_data, stock_df):
     return fig
 
 def main():
-    st.title("📈 Trading Dashboard")
+    st.title("Trading Dashboard")
     st.markdown("---")
     
     # Load trades
     trades_df = load_trades()
     
     if trades_df.empty:
-        st.warning("⚠️ No trades found. Run a backtest first to generate trades.")
+        st.warning("No trades found. Run a backtest first to generate trades.")
         st.info("Run: `python trade.py` to generate backtest results")
         return
     
@@ -263,7 +263,7 @@ def main():
     
     # Sidebar for filtering and sorting
     with st.sidebar:
-        st.header("⚙️ Filters & Settings")
+        st.header("Filters & Settings")
         
         # Sort options
         sort_by = st.selectbox(
@@ -297,7 +297,7 @@ def main():
         filtered_df = filtered_df.sort_values('symbol')
     
     # Display trades table
-    st.subheader("📊 Trade History")
+    st.subheader("Trade History")
     
     # Format the dataframe for display
     display_df = filtered_df.copy()
@@ -324,7 +324,7 @@ def main():
     st.markdown("---")
     
     # Chart section
-    st.subheader("📈 Trade Charts")
+    st.subheader("Trade Charts")
     
     # Select trade to view
     trade_options = [
@@ -368,8 +368,7 @@ def main():
                     st.info(f"**Exit:** {selected_trade['exit_time'].strftime('%Y-%m-%d %H:%M')}")
                     st.info(f"**Exit Price:** ${selected_trade['exit_price']:.2f}")
                 with col3:
-                    pnl_emoji = "🟢" if selected_trade['pnl'] >= 0 else "🔴"
-                    st.info(f"**P&L:** {pnl_emoji} ${selected_trade['pnl']:.2f}")
+                    st.info(f"**P&L:** ${selected_trade['pnl']:.2f}")
                     st.info(f"**P&L %:** {selected_trade['pnl_pct']:.2f}%")
                 
                 st.caption(f"**Exit Reason:** {selected_trade['reason']} | **Shares:** {selected_trade['shares']}")

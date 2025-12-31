@@ -19,9 +19,9 @@ Your trading system has been enhanced to check if stocks meet your criteria **ev
 
 ### 3. **Criteria Checked Daily**
 For each of the past 10 days, the system verifies:
-- ✓ Price in range: $1-$10
-- ✓ Relative Volume: >2x (daily volume vs 20-day average)
-- ✓ Float: <30M shares (static, doesn't change)
+- Price in range: $1-$10
+- Relative Volume: >2x (daily volume vs 20-day average)
+- Float: <30M shares (static, doesn't change)
 
 ## How It Works
 
@@ -51,7 +51,7 @@ For each timestamp in backtest:
 When running the script, you'll see:
 
 ```
-[1/50] Checking SYMBOL... Daily criteria: 7/10 days ✓ $5.23, 15.2M float
+[1/50] Checking SYMBOL... Daily criteria: 7/10 days $5.23, 15.2M float
 ```
 
 This shows:
@@ -60,10 +60,10 @@ This shows:
 
 During backtest:
 ```
-[2024-12-23 10:15] Added SYMBOL | $5.45 | RVol: 2.3x | Float: 15.2M | ✓ Met daily criteria
+[2024-12-23 10:15] Added SYMBOL | $5.45 | RVol: 2.3x | Float: 15.2M | Met daily criteria
 ```
 
-The "✓ Met daily criteria" confirms the stock qualified on that specific date.
+The "Met daily criteria" confirms the stock qualified on that specific date.
 
 ## Key Benefits
 
@@ -125,7 +125,7 @@ for symbol in strategy.daily_criteria_met:
     print(f"\n{symbol}: Met criteria on {days_met}/10 days")
     
     for date, met in sorted(criteria_days.items()):
-        status = "✓" if met else "✗"
+        status = "PASS" if met else "FAIL"
         print(f"  {date}: {status}")
 ```
 
@@ -168,8 +168,8 @@ for symbol in strategy.daily_criteria_met:
 ## Summary
 
 Your system now implements true day-by-day screening:
-- ✓ Checks criteria for each of the past 10 days
-- ✓ Only trades stocks on days they meet criteria
-- ✓ No lookahead bias
-- ✓ Transparent reporting of which days passed
-- ✓ Historical accuracy maintained
+- Checks criteria for each of the past 10 days
+- Only trades stocks on days they meet criteria
+- No lookahead bias
+- Transparent reporting of which days passed
+- Historical accuracy maintained
