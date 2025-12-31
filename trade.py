@@ -325,8 +325,8 @@ class MomentumHODStrategy:
             current_time = timestamp.time()
             is_last_day = current_date == last_date
             
-            # Close all positions before market close on last day
-            if is_last_day and current_time >= market_close_time:
+            # Close all positions before market close EVERY day at 3:55 PM EST
+            if current_time >= market_close_time:
                 for symbol in list(self.positions.keys()):
                     df = prepared_data[symbol]
                     if timestamp in df.index:
