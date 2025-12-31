@@ -188,7 +188,7 @@ if st.session_state.results is not None and not st.session_state.results.empty:
             yaxis=dict(showgrid=True, gridcolor='#f0f0f0', title='P&L ($)')
         )
         
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width='stretch')
         
         # P&L Distribution
         col1, col2 = st.columns(2)
@@ -211,7 +211,7 @@ if st.session_state.results is not None and not st.session_state.results.empty:
                 xaxis=dict(title='P&L ($)', showgrid=True, gridcolor='#f0f0f0'),
                 yaxis=dict(title='Count', showgrid=True, gridcolor='#f0f0f0')
             )
-            st.plotly_chart(fig_hist, use_container_width=True)
+            st.plotly_chart(fig_hist, width='stretch')
         
         with col2:
             st.subheader("Win/Loss Split")
@@ -229,7 +229,7 @@ if st.session_state.results is not None and not st.session_state.results.empty:
                 margin=dict(l=0, r=0, t=10, b=0),
                 showlegend=False
             )
-            st.plotly_chart(fig_pie, use_container_width=True)
+            st.plotly_chart(fig_pie, width='stretch')
     
     with tab2:
         st.subheader("Trade Details")
@@ -250,9 +250,9 @@ if st.session_state.results is not None and not st.session_state.results.empty:
             else:
                 return 'background-color: #e8f5e9'
         
-        styled_df = display_df.style.applymap(color_pnl, subset=['pnl'])
+        styled_df = display_df.style.map(color_pnl, subset=['pnl'])
         
-        st.dataframe(styled_df, use_container_width=True, hide_index=True)
+        st.dataframe(styled_df, width='stretch', hide_index=True)
         
         # Download button
         csv = results.to_csv(index=False)
@@ -261,7 +261,7 @@ if st.session_state.results is not None and not st.session_state.results.empty:
             csv,
             f"trades_{datetime.now().strftime('%Y%m%d')}.csv",
             "text/csv",
-            use_container_width=True
+            width='stretch'
         )
     
     with tab3:
@@ -274,7 +274,7 @@ if st.session_state.results is not None and not st.session_state.results.empty:
         symbol_perf.columns = ['Trades', 'Total P&L', 'Avg P&L']
         
         # Add win rate
-        symbol_perf['Wins'] = results.groupby('symbol').apply(
+        symbol_perf['Wins'] = results.groupby('symbol', include_groups=False).apply(
             lambda x: len(x[x['pnl'] > 0])
         )
         symbol_perf['Win Rate'] = (symbol_perf['Wins'] / symbol_perf['Trades'] * 100).round(1)
@@ -284,7 +284,7 @@ if st.session_state.results is not None and not st.session_state.results.empty:
         symbol_perf['Total P&L'] = symbol_perf['Total P&L'].apply(lambda x: f"${x:.2f}")
         symbol_perf['Avg P&L'] = symbol_perf['Avg P&L'].apply(lambda x: f"${x:.2f}")
         
-        st.dataframe(symbol_perf, use_container_width=True)
+        st.dataframe(symbol_perf, width='stretch')
         
         # Bar chart by symbol
         symbol_totals = results.groupby('symbol')['pnl'].sum().sort_values(ascending=True)
@@ -310,7 +310,7 @@ if st.session_state.results is not None and not st.session_state.results.empty:
             yaxis=dict(showgrid=False)
         )
         
-        st.plotly_chart(fig_bar, use_container_width=True)
+        st.plotly_chart(fig_bar, width='stretch')
 
 else:
     # Welcome screen

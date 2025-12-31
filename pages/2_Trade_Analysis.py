@@ -315,7 +315,7 @@ def main():
     
     st.dataframe(
         display_df[['symbol', 'Entry', 'Exit', 'Entry $', 'Exit $', 'shares', 'P&L', 'P&L %', 'reason']],
-        use_container_width=True,
+        width='stretch',
         height=400
     )
     
@@ -355,7 +355,7 @@ def main():
                 
                 # Display chart
                 fig = create_chart(symbol, trade_data, stock_df)
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, width='stretch')
                 
                 # Trade details
                 col1, col2, col3 = st.columns(3)
